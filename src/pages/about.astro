@@ -16,7 +16,7 @@ const careerTimeline = [
 		summary:
 			'Led multi-channel research launches for fintech and family offices, translating complex derivatives exposure into human language.',
 	},
-};
+];
 
 const earlierRoles = [
 	{
@@ -31,32 +31,21 @@ const earlierRoles = [
 	},
 ];
 
-const growthData = [
-	{ year: 2005, percent: 12 },
-	{ year: 2007, percent: 18 },
-	{ year: 2009, percent: 24 },
-	{ year: 2011, percent: 36 },
-	{ year: 2013, percent: 44 },
-	{ year: 2015, percent: 58 },
-	{ year: 2017, percent: 76 },
-	{ year: 2019, percent: 92 },
-	{ year: 2021, percent: 118 },
-	{ year: 2023, percent: 148 },
-	{ year: 2025, percent: 176 },
-];
-
-const maxPercent = Math.max(...growthData.map((point) => point.percent));
-const polylinePoints = growthData
-	.map((point, index) => {
-		const x = (index / (growthData.length - 1)) * 100;
-		const y = 100 - (point.percent / maxPercent) * 100;
-		return `${x},${y}`;
-	})
-	.join(' ');
 ---
 
 <Layout>
 	<div class="page">
+		<a href="/" class="home-icon" aria-label="Return to home">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M4 11.5 12 4l8 7.5M6.5 9v10.5h11V9"
+					stroke="currentColor"
+					stroke-width="1.4"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</a>
 		<header class="intro">
 			<div>
 				<p class="eyebrow">About</p>
@@ -113,42 +102,6 @@ const polylinePoints = growthData
 			</div>
 		</section>
 
-		<section class="growth">
-			<div class="section-heading">
-				<p class="eyebrow">Personal fund growth</p>
-				<h2>Compounding trust, represented in percentage growth only.</h2>
-				<p>
-					The chart shows twenty years of compounding based on a blended personal strategy. No dollar
-					amounts disclosed — only the percentage change that signals discipline and patient conviction.
-				</p>
-			</div>
-			<div class="chart-card">
-				<svg viewBox="0 0 100 100" role="img" aria-label="Percentage growth chart">
-					<defs>
-						<linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-							<stop offset="0%" stop-color="var(--accent)" />
-							<stop offset="100%" stop-color="var(--accent-strong)" />
-						</linearGradient>
-					</defs>
-					<polyline points={polylinePoints} />
-					{growthData.map((point, index) => (
-						<circle
-							cx={(index / (growthData.length - 1)) * 100}
-							cy={100 - (point.percent / maxPercent) * 100}
-							r="1.2"
-						></circle>
-					))}
-				</svg>
-				<ul class="chart-meta">
-					{growthData.map((point) => (
-						<li>
-							<span>{point.year}</span>
-							<strong>{point.percent}%</strong>
-						</li>
-					))}
-				</ul>
-			</div>
-		</section>
 	</div>
 </Layout>
 
@@ -164,6 +117,28 @@ const polylinePoints = growthData
 		display: flex;
 		flex-direction: column;
 		gap: 4rem;
+	}
+
+	.home-icon {
+		position: sticky;
+		top: 1.5rem;
+		left: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		color: var(--text);
+		background: rgba(255, 255, 255, 0.02);
+		margin-bottom: 1.5rem;
+		backdrop-filter: blur(6px);
+		text-decoration: none;
+	}
+
+	.home-icon:hover {
+		border-color: rgba(255, 255, 255, 0.25);
 	}
 
 	.eyebrow {
@@ -230,6 +205,22 @@ const polylinePoints = growthData
 		font-family: 'IBM Plex Mono', monospace;
 		font-size: 0.85rem;
 		letter-spacing: 0.08em;
+	}
+
+	.ghost {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.65rem 1.2rem;
+		border-radius: 999px;
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		color: var(--text);
+		text-decoration: none;
+		font-size: 0.9rem;
+	}
+
+	.ghost:hover {
+		border-color: rgba(148, 163, 184, 0.7);
 	}
 
 	.section-heading {
@@ -299,51 +290,6 @@ const polylinePoints = growthData
 		font-size: 0.9rem;
 	}
 
-	.growth .chart-card {
-		margin-top: 2rem;
-		padding: 2rem;
-		border-radius: 1.25rem;
-		background: rgba(255, 255, 255, 0.02);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-	}
-
-	svg {
-		width: 100%;
-		height: 320px;
-		background: radial-gradient(circle at 20% 20%, rgba(111, 227, 193, 0.05), transparent 50%);
-		border-radius: 1rem;
-		padding: 1rem;
-	}
-
-	svg polyline {
-		fill: none;
-		stroke: url('#lineGradient');
-		stroke-width: 2;
-	}
-
-	svg circle {
-		fill: var(--accent);
-	}
-
-	.chart-meta {
-		margin: 1.5rem 0 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-		gap: 1rem;
-		list-style: none;
-		padding: 0;
-	}
-
-	.chart-meta li {
-		display: flex;
-		justify-content: space-between;
-		padding: 0.75rem 1rem;
-		border-radius: 0.75rem;
-		background: rgba(4, 11, 20, 0.6);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		font-family: 'IBM Plex Mono', monospace;
-		font-size: 0.85rem;
-	}
 
 	@media (max-width: 720px) {
 		.card-head {
