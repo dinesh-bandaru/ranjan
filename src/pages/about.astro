@@ -1,0 +1,360 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const careerTimeline = [
+	{
+		title: 'Chief Market Strategist',
+		org: 'Bandaru Capital Studio',
+		years: '2021 — Present',
+		summary:
+			'Reimagining how boutique funds communicate performance by blending macro research, design systems, and calm storytelling.',
+	},
+	{
+		title: 'Head of Macro Narratives',
+		org: 'Northbound Partners',
+		years: '2014 — 2021',
+		summary:
+			'Led multi-channel research launches for fintech and family offices, translating complex derivatives exposure into human language.',
+	},
+};
+
+const earlierRoles = [
+	{
+		title: 'Senior Research Analyst',
+		org: 'Axis Insights Lab',
+		years: '2010 — 2014',
+	},
+	{
+		title: 'Equities Desk Strategist',
+		org: 'Sparkline Securities',
+		years: '2005 — 2010',
+	},
+];
+
+const growthData = [
+	{ year: 2005, percent: 12 },
+	{ year: 2007, percent: 18 },
+	{ year: 2009, percent: 24 },
+	{ year: 2011, percent: 36 },
+	{ year: 2013, percent: 44 },
+	{ year: 2015, percent: 58 },
+	{ year: 2017, percent: 76 },
+	{ year: 2019, percent: 92 },
+	{ year: 2021, percent: 118 },
+	{ year: 2023, percent: 148 },
+	{ year: 2025, percent: 176 },
+];
+
+const maxPercent = Math.max(...growthData.map((point) => point.percent));
+const polylinePoints = growthData
+	.map((point, index) => {
+		const x = (index / (growthData.length - 1)) * 100;
+		const y = 100 - (point.percent / maxPercent) * 100;
+		return `${x},${y}`;
+	})
+	.join(' ');
+---
+
+<Layout>
+	<div class="page">
+		<header class="intro">
+			<div>
+				<p class="eyebrow">About</p>
+				<h1>Chittaranjan Bandaru</h1>
+				<p>
+					Two decades in public markets taught me that precision and restraint build the deepest trust.
+					I craft minimalist systems that help founders, family offices, and media partners talk about
+					performance without the noise.
+				</p>
+			</div>
+			<div class="contact-card">
+				<p class="label">Collaborations</p>
+				<a class="primary" href="mailto:hello@ranjan.studio?subject=About%20Page%20Inquiry">Send an email</a>
+				<a class="link" href="https://www.linkedin.com/in/chittaranjanbandaru" target="_blank" rel="noreferrer"
+					>LinkedIn Profile ↗</a
+				>
+			</div>
+		</header>
+
+		<section class="career">
+			<div class="section-heading">
+				<p class="eyebrow">Career</p>
+				<h2>Market operator first, storyteller always.</h2>
+				<p>
+					My approach pairs institutional rigor with contemporary brand craft, giving investors clarity on
+					what matters while keeping compliance teams comfortable.
+				</p>
+			</div>
+			<div class="timeline">
+				{careerTimeline.map((role) => (
+					<article class="card">
+						<div class="card-head">
+							<h3>{role.title}</h3>
+							<span>{role.years}</span>
+						</div>
+						<p class="org">{role.org}</p>
+						<p>{role.summary}</p>
+					</article>
+				))}
+				<div class="early-roles">
+					<h4>Earlier Roles</h4>
+					<ul>
+						{earlierRoles.map((role) => (
+							<li>
+								<div>
+									<strong>{role.title}</strong>
+									<span>{role.org}</span>
+								</div>
+								<p>{role.years}</p>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="growth">
+			<div class="section-heading">
+				<p class="eyebrow">Personal fund growth</p>
+				<h2>Compounding trust, represented in percentage growth only.</h2>
+				<p>
+					The chart shows twenty years of compounding based on a blended personal strategy. No dollar
+					amounts disclosed — only the percentage change that signals discipline and patient conviction.
+				</p>
+			</div>
+			<div class="chart-card">
+				<svg viewBox="0 0 100 100" role="img" aria-label="Percentage growth chart">
+					<defs>
+						<linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" stop-color="var(--accent)" />
+							<stop offset="100%" stop-color="var(--accent-strong)" />
+						</linearGradient>
+					</defs>
+					<polyline points={polylinePoints} />
+					{growthData.map((point, index) => (
+						<circle
+							cx={(index / (growthData.length - 1)) * 100}
+							cy={100 - (point.percent / maxPercent) * 100}
+							r="1.2"
+						></circle>
+					))}
+				</svg>
+				<ul class="chart-meta">
+					{growthData.map((point) => (
+						<li>
+							<span>{point.year}</span>
+							<strong>{point.percent}%</strong>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	:global(body) {
+		font-size: clamp(15px, 1.1vw, 17px);
+	}
+
+	.page {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem 6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.24em;
+		font-size: 0.75rem;
+		color: var(--muted);
+		margin-bottom: 0.75rem;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0 0 0.75rem;
+	}
+
+	p {
+		color: var(--muted);
+		margin: 0 0 1rem;
+	}
+
+	.intro {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.contact-card {
+		padding: 1.5rem;
+		border-radius: 1.2rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		min-width: 260px;
+	}
+
+	.contact-card .label {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		font-size: 0.75rem;
+		color: var(--muted);
+	}
+
+	.primary {
+		display: inline-flex;
+		justify-content: center;
+		padding: 0.85rem 1.5rem;
+		border-radius: 999px;
+		text-decoration: none;
+		font-weight: 500;
+		background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+		color: #021712;
+	}
+
+	.link {
+		text-decoration: none;
+		color: var(--text);
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.85rem;
+		letter-spacing: 0.08em;
+	}
+
+	.section-heading {
+		max-width: 600px;
+	}
+
+	.career .timeline {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.card {
+		padding: 1.75rem;
+		border-radius: 1.25rem;
+		background: rgba(4, 11, 20, 0.8);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+	}
+
+	.card-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 0.5rem;
+	}
+
+	.card-head span {
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+
+	.org {
+		color: var(--text);
+		font-weight: 500;
+		margin-bottom: 0.75rem;
+	}
+
+	.early-roles {
+		padding: 1.75rem;
+		border-radius: 1.25rem;
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		background: rgba(255, 255, 255, 0.02);
+	}
+
+	.early-roles ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.early-roles li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.early-roles strong {
+		display: block;
+	}
+
+	.early-roles span {
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	.growth .chart-card {
+		margin-top: 2rem;
+		padding: 2rem;
+		border-radius: 1.25rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	svg {
+		width: 100%;
+		height: 320px;
+		background: radial-gradient(circle at 20% 20%, rgba(111, 227, 193, 0.05), transparent 50%);
+		border-radius: 1rem;
+		padding: 1rem;
+	}
+
+	svg polyline {
+		fill: none;
+		stroke: url('#lineGradient');
+		stroke-width: 2;
+	}
+
+	svg circle {
+		fill: var(--accent);
+	}
+
+	.chart-meta {
+		margin: 1.5rem 0 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+	}
+
+	.chart-meta li {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.75rem 1rem;
+		border-radius: 0.75rem;
+		background: rgba(4, 11, 20, 0.6);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.85rem;
+	}
+
+	@media (max-width: 720px) {
+		.card-head {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.early-roles li {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+</style>
+
