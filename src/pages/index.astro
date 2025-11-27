@@ -1,11 +1,611 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const stats = [
+	{ label: 'Audience reach', value: '310K+', detail: 'Newsletter · YouTube · X' },
+	{ label: 'Capital influenced', value: '$1.2B', detail: 'Family offices & growth funds' },
+	{ label: 'Average open rate', value: '58%', detail: 'Weekly brief subscribers' },
+];
+
+const tickers = [
+	{ symbol: 'NIFTY', value: '22,180', delta: '+0.84%', trend: 'up' },
+	{ symbol: 'SENSEX', value: '73,940', delta: '-0.15%', trend: 'down' },
+	{ symbol: 'BANK', value: '48,220', delta: '+0.33%', trend: 'up' },
+	{ symbol: 'USDINR', value: '83.09', delta: '+0.05%', trend: 'flat' },
+	{ symbol: 'BRENT', value: '81.44', delta: '-1.12%', trend: 'down' },
+];
+
+const services = [
+	{
+		title: 'Market voice',
+		copy: 'Anchor concise macro commentary for broadcasts or branded films with scripts shaped for busy decision makers.',
+	},
+	{
+		title: 'Research drops',
+		copy: 'Ghostwritten white-papers and slide decks that translate complex market structure into minimalist storytelling.',
+	},
+	{
+		title: 'Founder advisory',
+		copy: 'Quarterly positioning workshops to sync capital strategy, audience tone, and market proof points.',
+	},
+];
+
+const features = [
+	{
+		title: 'MoneyControl · Closing Bell',
+		detail: 'Weekly macro recap host translating technicals to narratives.',
+		year: '2024',
+	},
+	{
+		title: 'BloombergQuint · Primetime',
+		detail: 'Explains liquidity cycles in plain language for retail investors.',
+		year: '2023',
+	},
+	{
+		title: 'CNBC TV18 · Opening Trade',
+		detail: 'Live desk commentary with intraday playbooks for fintech brands.',
+		year: '2022',
+	},
+];
 ---
 
 <Layout>
-	<Welcome />
+	<div class="page">
+		<header class="hero">
+			<div class="hero-text">
+				<p class="eyebrow">Personal brand · modern market strategist</p>
+				<p class="nameplate">Chittaranjan Bandaru</p>
+				<h1>Minimal stories for a noisy market.</h1>
+				<p class="lead">
+					I’m Chittaranjan Bandaru — I help funds, founders, and media desks translate price action into narratives
+					that move trust. Clean visuals, signal-first copy, and calm energy even when the tape is volatile.
+				</p>
+				<div class="cta">
+					<a class="primary" href="mailto:hello@ranjan.studio?subject=Strategy%20Session">Book a
+						strategy call</a
+					>
+					<a class="ghost" href="#" aria-label="Download media kit PDF">Download media kit</a>
+				</div>
+				<div class="hero-trust" aria-label="Press mentions">
+					<span>Seen in</span>
+					<div class="press">
+						<span>Bloomberg</span>
+						<span>CNBC</span>
+						<span>MoneyControl</span>
+					</div>
+				</div>
+			</div>
+			<div class="hero-panel">
+				<p class="panel-label">Current focus</p>
+				<h2>Public markets, private confidence.</h2>
+				<p class="panel-copy">
+					Q4 mandate: craft a minimalist playbook for emerging fund managers balancing public exposure
+					with institutional-grade rigor.
+				</p>
+				<ul class="panel-metrics">
+					<li>
+						<span>Ethos</span>
+						<strong>Calm > Hype</strong>
+					</li>
+					<li>
+						<span>Format</span>
+						<strong>Daily ticker film</strong>
+					</li>
+					<li>
+						<span>Result</span>
+						<strong>+26% warm leads</strong>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<section class="ticker" aria-label="live sentiment ticker">
+			<div class="ticker-track">
+				{[...tickers, ...tickers].map((item) => (
+					<article class={`ticker-item ${item.trend}`}>
+						<span class="symbol">{item.symbol}</span>
+						<span class="value">{item.value}</span>
+						<span class="delta">{item.delta}</span>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="stats">
+			{stats.map((stat) => (
+				<article class="stat-card">
+					<p class="label">{stat.label}</p>
+					<p class="value">{stat.value}</p>
+					<p class="detail">{stat.detail}</p>
+				</article>
+			))}
+		</section>
+
+		<section class="about">
+			<div class="about-copy">
+				<h3>Built for measured ambition.</h3>
+				<p>
+					My work blends institutional research discipline with a minimalist design language.
+					Everything I publish is modular — scripts become carousels, carousels become stage decks.
+					This keeps your story coherent across newsletters, studio shoots, and investor notes.
+				</p>
+				<p>
+					Each engagement starts with an audit: positioning, audience sentiment, and opportunity
+					size. From there we build a repeatable cadence so your brand compounds just like your
+					capital.
+				</p>
+			</div>
+			<ul class="about-list">
+				<li>
+					<span>01</span>
+					<div>
+						<strong>Signal board</strong>
+						<p>Weekly Notion board visualizing macro signals + brand checkpoints.</p>
+					</div>
+				</li>
+				<li>
+					<span>02</span>
+					<div>
+						<strong>Creator ops</strong>
+						<p>Plug into my vetted crew of editors, motion artists, and data viz partners.</p>
+					</div>
+				</li>
+				<li>
+					<span>03</span>
+					<div>
+						<strong>Proof loops</strong>
+						<p>Every narrative ships with metrics to verify trust, not just impressions.</p>
+					</div>
+				</li>
+			</ul>
+		</section>
+
+		<section class="services">
+			<h3>Core offerings</h3>
+			<div class="service-grid">
+				{services.map((service) => (
+					<article class="service-card">
+						<h4>{service.title}</h4>
+						<p>{service.copy}</p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="features">
+			<h3>Media features</h3>
+			<ul>
+				{features.map((feature) => (
+					<li>
+						<div>
+							<strong>{feature.title}</strong>
+							<p>{feature.detail}</p>
+						</div>
+						<span>{feature.year}</span>
+					</li>
+				))}
+			</ul>
+		</section>
+
+		<section class="contact">
+			<div>
+				<p class="eyebrow">Next slot · December</p>
+				<h3>Let’s architect your market voice.</h3>
+				<p>
+					Send a quick note with your goals, channels, and current brand assets. I’ll respond within
+					48 hours with a tailored outline.
+				</p>
+			</div>
+			<div class="contact-actions">
+				<a class="primary" href="mailto:hello@ranjan.studio">Write an email</a>
+				<a class="ghost" href="https://cal.com" target="_blank" rel="noreferrer">Reserve a 20-min slot</a>
+			</div>
+		</section>
+	</div>
 </Layout>
+
+<style>
+	:global(body) {
+		font-size: clamp(15px, 1.1vw, 17px);
+		line-height: 1.6;
+	}
+
+	.page {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem 6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+		position: relative;
+	}
+
+	.page::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: linear-gradient(
+				rgba(255, 255, 255, 0.02) 1px,
+				transparent 1px
+			),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+		background-size: 80px 80px;
+		opacity: 0.4;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.hero-text .lead {
+		max-width: 48ch;
+		color: var(--muted);
+		margin-bottom: 1.5rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.24em;
+		font-size: 0.75rem;
+		color: var(--muted);
+		margin-bottom: 0.75rem;
+	}
+
+	h1 {
+		font-size: clamp(2.6rem, 5vw, 3.5rem);
+		line-height: 1.1;
+		margin: 0 0 1rem;
+	}
+
+	.nameplate {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 0.9rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.04);
+		font-family: 'IBM Plex Mono', monospace;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		margin-bottom: 0.85rem;
+	}
+
+	.cta {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-bottom: 1.5rem;
+	}
+
+	.primary,
+	.ghost {
+		padding: 0.85rem 1.5rem;
+		border-radius: 999px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: transform 150ms ease, background 150ms ease;
+	}
+
+	.primary {
+		background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+		color: #021712;
+	}
+
+	.ghost {
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		color: var(--text);
+	}
+
+	.primary:focus-visible,
+	.ghost:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	.primary:hover,
+	.ghost:hover {
+		transform: translateY(-2px);
+	}
+
+	.hero-trust {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	.hero-trust .press {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		text-transform: uppercase;
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.8rem;
+		letter-spacing: 0.2em;
+	}
+
+	.hero-panel {
+		padding: 2rem;
+		border-radius: 1.25rem;
+		background: rgba(4, 11, 20, 0.7);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+	}
+
+	.hero-panel h2 {
+		margin: 0.5rem 0 0.75rem;
+		font-size: 1.5rem;
+	}
+
+	.panel-label {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--muted);
+		margin: 0;
+	}
+
+	.panel-copy {
+		color: var(--muted);
+		margin-bottom: 1.5rem;
+	}
+
+	.panel-metrics {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.panel-metrics span {
+		font-size: 0.75rem;
+		color: var(--muted);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.panel-metrics strong {
+		display: block;
+		margin-top: 0.35rem;
+		font-size: 1.05rem;
+	}
+
+	.ticker {
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 999px;
+		padding: 0.6rem 0;
+		overflow: hidden;
+		background: rgba(2, 8, 15, 0.65);
+	}
+
+	.ticker-track {
+		display: flex;
+		width: max-content;
+		gap: 0.5rem;
+		animation: ticker 28s linear infinite;
+	}
+
+	@keyframes ticker {
+		from {
+			transform: translateX(0);
+		}
+
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	.ticker-item {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		padding: 0.3rem 1.5rem;
+		background: rgba(255, 255, 255, 0.02);
+		border-radius: 999px;
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+	}
+
+	.ticker-item.up .delta {
+		color: #5df2b3;
+	}
+
+	.ticker-item.down .delta {
+		color: #ff7b7b;
+	}
+
+	.ticker-item.flat .delta {
+		color: #d4d4d8;
+	}
+
+	.symbol {
+		color: var(--muted);
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1rem;
+	}
+
+	.stat-card {
+		padding: 1.75rem;
+		border-radius: 1.1rem;
+		background: var(--layer);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.stat-card .label {
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--muted);
+		font-size: 0.75rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.stat-card .value {
+		font-size: 2rem;
+		margin: 0;
+	}
+
+	.stat-card .detail {
+		color: var(--muted);
+		margin: 0.25rem 0 0;
+	}
+
+	.about {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.about-copy h3,
+	.services h3,
+	.features h3,
+	.contact h3 {
+		font-size: 1.6rem;
+		margin: 0 0 1rem;
+	}
+
+	.about-copy p {
+		color: var(--muted);
+	}
+
+	.about-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.about-list li {
+		display: flex;
+		gap: 1rem;
+		padding: 1.25rem;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.04);
+	}
+
+	.about-list span {
+		font-family: 'IBM Plex Mono', monospace;
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	.about-list strong {
+		display: block;
+		margin-bottom: 0.35rem;
+	}
+
+	.about-list p {
+		color: var(--muted);
+		margin: 0;
+	}
+
+	.services .service-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1rem;
+	}
+
+	.service-card {
+		padding: 1.5rem;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.01);
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		min-height: 200px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.service-card h4 {
+		margin: 0;
+		font-size: 1.1rem;
+	}
+
+	.service-card p {
+		color: var(--muted);
+	}
+
+	.features ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.features li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.25rem 1.5rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		background: rgba(6, 14, 24, 0.6);
+	}
+
+	.features strong {
+		display: block;
+		margin-bottom: 0.25rem;
+	}
+
+	.features p {
+		margin: 0;
+		color: var(--muted);
+	}
+
+	.features span {
+		font-family: 'IBM Plex Mono', monospace;
+		color: var(--muted);
+	}
+
+	.contact {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+		align-items: center;
+		padding: 2.5rem;
+		border-radius: 1.5rem;
+		background: linear-gradient(135deg, rgba(111, 227, 193, 0.1), rgba(2, 4, 9, 0.9));
+		border: 1px solid rgba(111, 227, 193, 0.3);
+	}
+
+	.contact p {
+		margin: 0 0 0.75rem;
+		color: var(--muted);
+	}
+
+	.contact-actions {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	@media (max-width: 640px) {
+		.hero-trust {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.features li {
+			flex-direction: column;
+		}
+	}
+</style>
